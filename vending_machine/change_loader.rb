@@ -16,6 +16,8 @@ class ChangeLoader < Loader
 
   def valid_delivery?(formatted_json)
     formatted_json.key?('change') && formatted_json['change'].is_a?(Array) &&
-      formatted_json['change'].all? { |item| check_valid?(item, ALLOWED_CHANGE) }
+      formatted_json['change'].all? do |item|
+        check_valid?(item, ALLOWED_CHANGE)
+      end
   end
 end

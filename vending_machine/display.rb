@@ -1,6 +1,10 @@
 # A class to display messages to user
 class Display
   class << self
+    def added_change
+      puts 'Successfully added change'
+    end
+
     def added_stock
       puts 'Successfully added stock'
     end
