@@ -87,6 +87,10 @@ class Display
       puts 'Thank you for using Thomas Blakey\'s vending machine'
     end
 
+    def unknown_item_code
+      puts 'You have entered an unknown item code.'
+    end
+
     def unknown_option
       puts 'You have entered an unknown option.'
     end
