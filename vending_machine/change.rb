@@ -14,7 +14,7 @@ class Change
 
   def able_to_provide_change?(to_be_given)
     # need to provide exact change, simply reducing our change
-    # hash won't do
+    # hash for sum of coins won't do, 2 50p can't provide for 75p
     to_be_used = coins_to_be_used(to_be_given,
                                   change.dup,
                                   COIN_INFORMATION.values.reverse,
@@ -23,10 +23,15 @@ class Change
   end
 
   def add_change(new_coins)
-    new_coins.each do |coin|
+    return if new_coins['change'].nil?
+    new_coins['change'].each do |coin|
       change[string_to_amount(coin['name'])] += coin['quantity']
     end
     Display.added_change
+  end
+
+  def add_coin(amount)
+    change[amount] += 1
   end
 
   def give_change(to_be_given)
@@ -54,7 +59,8 @@ class Change
       available[value] -= 1
       to_be_used << value
       coins_to_be_used(amount_required, available, coins, to_be_used)
-    elsif greater_than_required_and_coins?(coins, amount_required, value)
+    elsif greater_than_required_and_coins?(amount_required, coins, value) ||
+          less_than_and_not_available?(amount_required, available, value)
       coins_to_be_used(amount_required, available, coins.drop(1), to_be_used)
     else
       to_be_used
@@ -65,12 +71,16 @@ class Change
     value == amount_required && available[value] > 0
   end
 
-  def greater_than_required_and_coins?(coins, value, to_be_used)
-    value > to_be_used && coins.length > 1
+  def greater_than_required_and_coins?(amount_required, coins, value)
+    value > amount_required && coins.length > 1
   end
 
   def less_than_and_available?(amount_required, available, value)
     value < amount_required && available[value] > 0
+  end
+
+  def less_than_and_not_available?(amount_required, available, value)
+    value < amount_required && available[value].zero?
   end
 
   def remove_change(coins)

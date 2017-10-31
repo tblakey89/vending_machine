@@ -4,7 +4,9 @@ RSpec.describe Stock do
   subject { Stock.new(initial_stock) }
   let(:item_name) { 'Coca Cola' }
   let(:item_code) { '201' }
-  let(:initial_stock) { [{ 'name' => item_name, 'quantity' => 5 }] }
+  let(:initial_stock) do
+    { 'items' => [{ 'name' => item_name, 'quantity' => 5 }] }
+  end
   before do
     stub_const('Stock::PRODUCT_INFORMATION',
                item_name => { code: item_code, price: 50 })
@@ -12,7 +14,7 @@ RSpec.describe Stock do
 
   describe '#new' do
     context 'no initial stock' do
-      let(:initial_stock) { {} }
+      let(:initial_stock) { { 'items' => [] } }
       it 'should set up items' do
         stock = subject.items
         expect(stock.length).to eql(1)
@@ -30,7 +32,9 @@ RSpec.describe Stock do
   end
 
   describe '#add_items' do
-    let(:new_stock) { [{ 'name' => item_name, 'quantity' => 10 }] }
+    let(:new_stock) do
+      { 'items' => [{ 'name' => item_name, 'quantity' => 10 }] }
+    end
     it 'increases quantity of available items' do
       subject
       expect(Display).to receive(:added_stock)
@@ -53,6 +57,14 @@ RSpec.describe Stock do
     end
   end
 
+  describe '#item_details' do
+    it 'displays product information' do
+      item = subject.item_details(item_code)
+      expect(item[:name]).to eql(item_name)
+      expect(item[:quantity]).to eql(5)
+    end
+  end
+
   describe '#list' do
     context 'when item is in stock' do
       it 'shows stock level of items' do
@@ -62,7 +74,9 @@ RSpec.describe Stock do
     end
 
     context 'when item is not in stock' do
-      let(:initial_stock) { [{ 'name' => item_name, 'quantity' => 0 }] }
+      let(:initial_stock) do
+        { 'items' => [{ 'name' => item_name, 'quantity' => 0 }] }
+      end
       it 'shows out of stock message for item' do
         expect(Display).to receive(:out_of_stock)
         subject.list

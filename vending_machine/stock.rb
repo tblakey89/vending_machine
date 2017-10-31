@@ -13,7 +13,8 @@ class Stock
   attr_reader :items
 
   def add_items(new_items)
-    new_items.each do |new_item|
+    return if new_items['items'].nil?
+    new_items['items'].each do |new_item|
       items[new_item['name']][:quantity] += new_item['quantity']
     end
     Display.added_stock
@@ -22,6 +23,10 @@ class Stock
   def available?(item_code)
     item = find_item(item_code)
     !item.nil? && item[:quantity] > 0
+  end
+
+  def item_details(item_code)
+    find_item(item_code)
   end
 
   def list

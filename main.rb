@@ -1,14 +1,6 @@
-# Main class for vending machine application
-class Main
-  def initialise
+require_relative 'vending_machine/vending_machine'
 
-  end
-
-  def list_items
-
-  end
-end
-
+VendingMachine.new.start
 # Design a vending machine using ruby. The vending machine should perform as
 # follows:
 # Once an item is selected and the appropriate amount of money is inserted, the

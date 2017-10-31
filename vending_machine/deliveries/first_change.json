@@ -1,0 +1,36 @@
+{
+  "change": [
+    {
+      "name": "£2",
+      "quantity": 10
+    },
+    {
+      "name": "£1",
+      "quantity": 5
+    },
+    {
+      "name": "50p",
+      "quantity": 7
+    },
+    {
+      "name": "20p",
+      "quantity": 4
+    },
+    {
+      "name": "10p",
+      "quantity": 20
+    },
+    {
+      "name": "5p",
+      "quantity": 30
+    },
+    {
+      "name": "2p",
+      "quantity": 35
+    },
+    {
+      "name": "1p",
+      "quantity": 120
+    }
+  ]
+}

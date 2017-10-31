@@ -2,7 +2,9 @@ require_relative '../../vending_machine/change'
 
 RSpec.describe Change do
   subject { Change.new(initial_change) }
-  let(:initial_change) { [{ 'name' => coin_name, 'quantity' => 5 }] }
+  let(:initial_change) do
+    { 'change' => [{ 'name' => coin_name, 'quantity' => 5 }] }
+  end
   let(:coin_name) { '20p' }
   let(:coin_amount) { 20 }
   before do
@@ -11,7 +13,7 @@ RSpec.describe Change do
 
   describe '#new' do
     context 'no initial change' do
-      let(:initial_change) { {} }
+      let(:initial_change) { { 'change' => [] } }
       it 'should set up change' do
         change = subject.change
         expect(change.length).to eql(1)
@@ -44,10 +46,10 @@ RSpec.describe Change do
 
       describe 'different coin types' do
         let(:initial_change) do
-          [
+          { 'change' => [
             { 'name' => coin_name, 'quantity' => 5 },
             { 'name' => '1p', 'quantity' => 100 }
-          ]
+          ] }
         end
         before do
           stub_const('Change::COIN_INFORMATION', coin_name => coin_amount,
@@ -67,12 +69,21 @@ RSpec.describe Change do
   end
 
   describe '#add_change' do
-    let(:new_change) { [{ 'name' => coin_name, 'quantity' => 30 }] }
+    let(:new_change) do
+      { 'change' =>  [{ 'name' => coin_name, 'quantity' => 30 }] }
+    end
     it 'increases quantity of available coins' do
       subject
       expect(Display).to receive(:added_change)
       subject.add_change(new_change)
       expect(subject.change[coin_amount]).to eql(35)
+    end
+  end
+
+  describe '#add_coin' do
+    it 'increases quantity of coin by one' do
+      subject.add_coin(coin_amount)
+      expect(subject.change[coin_amount]).to eql(6)
     end
   end
 
