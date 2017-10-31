@@ -7,7 +7,6 @@ require_relative 'change_collector'
 # class to represent vending machine
 class VendingMachine
   def initialize
-    p Dir.pwd
     @stock = Stock.new(load_delivery(FIRST_DELIVERY))
     @change = Change.new(load_change(FIRST_CHANGE))
   end

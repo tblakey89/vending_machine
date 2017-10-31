@@ -70,7 +70,7 @@ RSpec.describe Change do
 
   describe '#add_change' do
     let(:new_change) do
-      { 'change' =>  [{ 'name' => coin_name, 'quantity' => 30 }] }
+      { 'change' => [{ 'name' => coin_name, 'quantity' => 30 }] }
     end
     it 'increases quantity of available coins' do
       subject

@@ -51,6 +51,7 @@ class Change
 
   def coins_to_be_used(amount_required, available, coins, to_be_used)
     # this could be put into a service class to refactor it
+    return to_be_used if coins.length.zero?
     value = coins.first
     if equal_and_available?(amount_required, available, value)
       to_be_used << value
