@@ -21,7 +21,6 @@ class ChangeCollector
       break if change_entered >= amount_required
     end
     return_change
-    Display.success_change
     true
   end
 

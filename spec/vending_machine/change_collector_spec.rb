@@ -25,7 +25,6 @@ RSpec.describe ChangeCollector do
         expect(Display).to receive(:added_coin).exactly(5).times
         expect(Display).to receive(:return_change).exactly(0).times
         expect(Display).to receive(:invalid_coin).exactly(0).times
-        expect(Display).to receive(:success_change).once
         expect(subject.run).to be true
       end
     end
@@ -37,7 +36,6 @@ RSpec.describe ChangeCollector do
         expect(Display).to receive(:added_coin).exactly(5).times
         expect(Display).to receive(:return_change).once
         expect(Display).to_not receive(:invalid_coin).exactly(0).times
-        expect(Display).to receive(:success_change).once
         expect(subject.run).to be true
       end
     end
@@ -53,7 +51,6 @@ RSpec.describe ChangeCollector do
         expect(Display).to receive(:not_enough_change_available).once
         expect(Display).to receive(:return_change).once
         expect(Display).to receive(:invalid_coin).exactly(0).times
-        expect(Display).to receive(:success_change).exactly(0).times
         expect(subject.run).to be false
       end
     end
@@ -68,7 +65,6 @@ RSpec.describe ChangeCollector do
         expect(Display).to receive(:added_coin).exactly(0).times
         expect(Display).to receive(:return_change).once
         expect(Display).to receive(:invalid_coin).exactly(0).times
-        expect(Display).to receive(:success_change).exactly(0).times
         expect(subject.run).to be false
       end
     end
@@ -83,7 +79,6 @@ RSpec.describe ChangeCollector do
         expect(Display).to receive(:added_coin).exactly(0).times
         expect(Display).to receive(:return_change).once
         expect(Display).to receive(:invalid_coin).once
-        expect(Display).to receive(:success_change).exactly(0).times
         expect(subject.run).to be false
       end
     end
@@ -101,7 +96,6 @@ RSpec.describe ChangeCollector do
         expect(Display).to receive(:added_coin).exactly(3).times
         expect(Display).to receive(:return_change).once
         expect(Display).to receive(:invalid_coin).exactly(0).times
-        expect(Display).to receive(:success_change).exactly(0).times
         expect(subject.run).to be false
       end
     end

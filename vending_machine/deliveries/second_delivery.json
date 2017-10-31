@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "name": "Coca Cola",
+      "quantity": 1
+    },
+    {
+      "name": "Fanta",
+      "quantity": 3
+    },
+    {
+      "name": "Sprite",
+      "quantity": 2
+    },
+    {
+      "name": "Oasis",
+      "quantity": 7
+    },
+    {
+      "name": "Water",
+      "quantity": 0
+    }
+  ]
+}
